@@ -35,9 +35,7 @@ O projeto funciona como um pequeno editor de README e documentos `.md`, oferecen
 
 A aplicação poderá ser acessada online em:
 
-👉 **[Acessar Markdown Editor](COLOQUE_AQUI_O_LINK_DO_PROJETO)**
-
-> Substitua `COLOQUE_AQUI_O_LINK_DO_PROJETO` pela URL do deploy.
+👉 **[Acessar Markdown Editor](https://markdown-editor-topaz.vercel.app/)**
 
 ---
 
