@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MarkIt - Markdown Editor</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">M</div>
+          <div>
+            <strong>MarkIt</strong>
+            <span>Markdown Editor</span>
+          </div>
+        </div>
+
+        <button class="new-document" id="newDocument" type="button">
+          <span aria-hidden="true">+</span>
+          Novo documento
+        </button>
+
+        <div class="documents-header">Documentos</div>
+
+        <label class="search-box">
+          <span aria-hidden="true">⌕</span>
+          <input id="searchDocuments" type="search" placeholder="Buscar documentos..." />
+        </label>
+
+        <nav class="document-list" id="documentList" aria-label="Documentos salvos"></nav>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div class="file-info">
+            <div class="file-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img">
+                <path d="M6 3.75h8.2L18 7.55v12.7H6V3.75Z" />
+                <path d="M14 3.75V8h4" />
+                <path d="M8.8 12h6.4M8.8 15.5h4.8" />
+              </svg>
+            </div>
+            <div>
+              <label class="file-name-label">
+                <input id="fileName" type="text" value="meu-projeto.md" aria-label="Nome do arquivo" />
+                <span class="save-dot" title="Salvo"></span>
+              </label>
+              <p id="saveStatus">Salvo localmente</p>
+            </div>
+          </div>
+
+          <div class="top-actions">
+            <input id="importFile" type="file" accept=".md,.markdown,text/markdown,text/plain" hidden />
+            <button id="importButton" class="action-button" type="button">
+              <span aria-hidden="true">↥</span>
+              Importar .md
+            </button>
+            <button id="exportButton" class="action-button" type="button">
+              <span aria-hidden="true">↧</span>
+              Exportar .md
+            </button>
+            <button id="copyHtmlButton" class="action-button" type="button">
+              <span aria-hidden="true">&lt;/&gt;</span>
+              Copiar HTML
+            </button>
+            <button id="fullscreenButton" class="icon-button" type="button" aria-label="Tela cheia" title="Tela cheia">
+              <span aria-hidden="true">⛶</span>
+            </button>
+            <button id="themeButton" class="theme-toggle" type="button" aria-label="Alternar tema" title="Alternar tema">
+              <span aria-hidden="true">☼</span>
+              <span aria-hidden="true">●</span>
+            </button>
+          </div>
+        </header>
+
+        <section class="editor-card" aria-label="Editor markdown">
+          <div class="editor-toolbar" aria-label="Ferramentas de markdown">
+            <button data-wrap="# " type="button" title="Título">H</button>
+            <button data-wrap="**" type="button" title="Negrito"><strong>B</strong></button>
+            <button data-wrap="*" type="button" title="Itálico"><em>I</em></button>
+            <button data-wrap="~~" type="button" title="Riscado"><s>S</s></button>
+            <button data-wrap="`" type="button" title="Código">&lt;/&gt;</button>
+            <button data-insert="[texto](https://)" type="button" title="Link">⌁</button>
+            <button data-insert="![alt](imagem.png)" type="button" title="Imagem">▧</button>
+            <button data-prefix="- " type="button" title="Lista">☷</button>
+            <button data-prefix="1. " type="button" title="Lista numerada">☰</button>
+            <button data-prefix="- [ ] " type="button" title="Checklist">☑</button>
+            <button data-prefix="> " type="button" title="Citação">❝</button>
+            <button data-insert="\n---\n" type="button" title="Linha">─</button>
+            <button data-insert="\n| Coluna | Valor |\n| --- | --- |\n| Item | Texto |\n" type="button" title="Tabela">▦</button>
+          </div>
+
+          <div class="preview-tab">
+            <span aria-hidden="true">◉</span>
+            Preview
+          </div>
+
+          <div class="panes">
+            <section class="editor-pane" aria-label="Editor">
+              <div class="line-numbers" id="lineNumbers" aria-hidden="true"></div>
+              <textarea id="editor" spellcheck="false" aria-label="Conteúdo Markdown"></textarea>
+            </section>
+
+            <section class="preview-pane" aria-label="Preview">
+              <article id="preview" class="markdown-preview"></article>
+            </section>
+          </div>
+
+          <footer class="statusbar">
+            <span id="cursorPosition">Ln 1, Col 1</span>
+            <span>Markdown</span>
+            <span id="characterCount">0 caracteres</span>
+            <span class="autosave">Auto-salvo <i></i></span>
+          </footer>
+        </section>
+
+        <section class="helper-strip" aria-label="Dicas de Markdown">
+          <div class="tip">
+            <span aria-hidden="true">♢</span>
+            <p>Use <kbd>Ctrl</kbd> + <kbd>S</kbd> para salvar rapidamente</p>
+          </div>
+          <div class="cheatsheet">
+            <span>Markdown cheatsheet</span>
+            <button data-cheat="# Título" type="button"># Título</button>
+            <button data-cheat="## Subtítulo" type="button">## Subtítulo</button>
+            <button data-cheat="**Negrito**" type="button">**Negrito**</button>
+            <button data-cheat="*Itálico*" type="button">*Itálico*</button>
+            <button data-cheat="`código`" type="button">`código`</button>
+            <button data-cheat="[link](url)" type="button">[link](url)</button>
+            <button data-cheat="![img](url)" type="button">![img](url)</button>
+            <button data-cheat="- Item" type="button">- Item</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
